@@ -1,0 +1,25 @@
+process_sample() {
+  sample=$1
+  
+  in_fa="/path/to/3.megahit/${sample}.fa"
+  out_dir="/path/to/4.prodigal"
+  out_fa="${out_dir}/${sample}.fa"
+
+  mkdir -p "${out_dir}"
+
+  if [ -f "$in_fa" ]; then
+    prodigal -i "${in_fa}" -d "${out_fa}" -p meta
+    
+    sed -i "s/^>\([^ ]*\).*/>${sample}_\1/" "${out_fa}"
+    
+    echo "✅ Sample ${sample} processing completed"
+  else
+    echo "❌ Error: Input file not found ${in_fa}"
+  fi
+}
+
+export -f process_sample
+
+LIST_PATH="/path/to/batch1_90.list"
+
+cat "${LIST_PATH}" | parallel -j 4 process_sample

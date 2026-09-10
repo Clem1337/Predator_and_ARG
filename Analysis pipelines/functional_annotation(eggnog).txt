@@ -1,0 +1,13 @@
+emapper.py \
+  -i "$IN" \
+  --itype CDS \
+  --translate \
+  -m diamond \
+  --dmnd_db "$DMND_DB" \
+  --data_dir "$DB_DIR" \
+  --cpu "$THREADS" \
+  --seed_ortholog_evalue 1e-5 \
+  --output_dir "$OUT_DIR" \
+  -o "$PREFIX" \
+  --dbmem \
+  --resume # Interruption Resuming

@@ -1,0 +1,17 @@
+/path/to/gmes_linux_64/gmes_petap.pl --ES --sequence /path/to/megahit/${sample}/euk_contigs.fa --cores 2 --work_dir /path/to/megahit/${sample}/genemark
+
+awk -F'\t' '{
+  split($1, a, " ");
+  new1 = a[1];
+  printf("%s", new1);
+  for(i=2; i<=NF; i++){
+    printf("\t%s", $i);
+  }
+  printf("\n");
+}' /path/to/megahit/${sample}/genemark/genemark.gtf > /path/to/megahit/${sample}/genemark/genemark_clean.gtf
+
+/path/to/gffread /path/to/megahit/${sample}/genemark/genemark_clean.gtf -g /path/to/megahit/${sample}/euk_contigs.fa -x /path/to/megahit/${sample}/${sample}_euk_contigs_cds.fasta
+
+    rm -rf /path/to/megahit/${sample}/genemark/*
+    sed -i "s/^>\(.*\)/>${sample}_euk_contigs_cds_\1/" "/path/to/megahit/${sample}/${sample}_euk_contigs_cds.fasta"
+  rm -rf "/path/to/megahit/${sample}/euk_contigs.fa"

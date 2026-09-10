@@ -1,0 +1,17 @@
+# 1. Give priority to using the local cache disk provided by SLURM for the computing node. If not available, use /tmp
+LOCAL_TMP=${TMPDIR:-/tmp}
+
+# 2. Create a task list file
+cmd_list="$out_dir/kofam_commands.txt"
+> "$cmd_list" # Clear/Create a new file
+
+# 3. Parse all the variables in advance and write them as plain text commands
+for faa in "$in_dir"/*.faa; do
+    sample=$(basename "$faa" .faa)
+    
+    # Generate an independent temporary folder path for each sample
+    tmp_dir="$LOCAL_TMP/kofam_tmp_${sample}_$RANDOM"
+    
+    # Write the complete single-line execution logic to the file
+    echo "mkdir -p $tmp_dir && exec_annotation --profile $profile --ko-list $ko_list --cpu 8 -f mapper --report-unannotated --tmp-dir $tmp_dir -o $out_dir/${sample}.mapper $faa && rm -rf $tmp_dir" >> "$cmd_list"
+done

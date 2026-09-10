@@ -1,0 +1,4 @@
+for i in $(cat add_pair.list); do
+mkdir -p 3.rnaspades/${i}
+spades.py --rna -1 2.cleandata_sortmerna/no_rRNA/pair/${i}_1.fq.gz -2 2.cleandata_sortmerna/no_rRNA/pair/${i}_2.fq.gz -o 3.rnaspades/${i} -t 64 -m 200
+done

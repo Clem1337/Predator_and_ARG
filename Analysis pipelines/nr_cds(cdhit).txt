@@ -1,0 +1,1 @@
+cd-hit-est -aS 0.9 -c 0.95 -G 0 -M 0 -T 64 -n 8 -d 0 -g 1 -i  o 

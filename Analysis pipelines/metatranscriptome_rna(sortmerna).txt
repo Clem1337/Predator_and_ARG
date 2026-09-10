@@ -1,0 +1,15 @@
+    sortmerna --index 0 --threads 20 \
+        --ref "${REF_BASE}/silva-bac-16s-id90.fasta" \
+        --ref "${REF_BASE}/silva-bac-23s-id98.fasta" \
+        --ref "${REF_BASE}/silva-arc-16s-id95.fasta" \
+        --ref "${REF_BASE}/silva-arc-23s-id98.fasta" \
+        --ref "${REF_BASE}/silva-euk-18s-id95.fasta" \
+        --ref "${REF_BASE}/silva-euk-28s-id98.fasta" \
+        --ref "${REF_BASE}/rfam-5s-database-id98.fasta" \
+        --ref "${REF_BASE}/rfam-5.8s-database-id98.fasta" \
+        --reads "${IN_DIR}/${i}_1.fq.gz" \
+        --reads "${IN_DIR}/${i}_2.fq.gz" \
+        --workdir "${WORK_DIR}" \
+        --aligned "${RRNA_DIR}/${i}" \
+        --other "${NO_RRNA_DIR}/${i}" \
+        --paired_in --fastx --out2

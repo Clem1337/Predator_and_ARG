@@ -1,0 +1,1 @@
+EukRep -i /path/to/megahit/${sample}/final.contigs.fa -o /path/to/megahit/${sample}/euk_contigs.fa --prokarya /path/to/megahit/${sample}/prok_contigs.fa
